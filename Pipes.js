@@ -3,45 +3,41 @@ class Pipes {
         this.pipes = [];
         this.xspeed = 2.5;
         this.x = width;
+        this.gap = 130;
     }
 
     draw() {
         for (let i = 0; i < this.pipes.length; i++) {
-            rect(this.pipes[i].top.x, this.pipes[i]["top"].y, this.pipes[i]["top"].w, this.pipes[i]["top"].h);
-            rect(this.pipes[i]["bottom"].x, this.pipes[i]["bottom"].y, this.pipes[i]["bottom"].w, this.pipes[i]["bottom"].h);
-
-
+            rect(...this.pipes[i]["top"]);
+            rect(...this.pipes[i]["bottom"]);
         }
-
     }
 
     update() {
-
         //every 55 frames new pipe
-        if(frameCount % 55 === 0) {
+        if (frameCount % 55 === 0) {
+            let quarterWidth= height/4;
+            let gapStart= quarterWidth;
+            let gapEnd= quarterWidth*3-this.gap;
+            let randomStartGapY= Math.random() * (gapEnd - gapStart + 1)  + gapStart;
+
             this.pipes.push(
                 {
                     "top":
-                        {"x": this.x, "y": -1, "w": 40, "h": 100},
+                        [this.x, -1, 40, randomStartGapY],
                     "bottom":
-                        {"x": this.x, "y": height, "w": 40, "h": -100}
+                        [this.x, randomStartGapY+this.gap, 40, height]
                 });
         }
-        if(this.pipes.length >5){
+        if (this.pipes.length > 4) {
             this.pipes.shift();
         }
-
-
-// console.log(this.pipes[1]);
         for (let i = 0; i < this.pipes.length; i++) {
-            this.pipes[i]["top"]["x"] -= this.xspeed;
-            this.pipes[i]["bottom"]["x"] -= this.xspeed;
+            this.pipes[i]["top"][0] -= this.xspeed;
+            this.pipes[i]["bottom"][0] -= this.xspeed;
 
         }
-
-//this.pipes.push(this.x);
     }
-
 
 
 }

@@ -1,5 +1,6 @@
 let bird;
-let pipes
+let pipes;
+
 
 function setup() {
   // put setup code here
@@ -24,4 +25,8 @@ function keyPressed(){
     if(keyCode = "UP_ARROW"){
         bird.up();
     }
+}
+function mousePressed() {
+    console.log();
+    bird.up();
 }
