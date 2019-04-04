@@ -11,6 +11,10 @@ function preload(){
     base = loadImage('images/base.png');
     botPipeImg = loadImage('images/pipe-green.png');
     topPipImg =loadImage('images/pipe-green-top.png');
+    birdImgMidFlap = loadImage('images/yellowbird-midflap.png');
+    birdImgDownFlap =loadImage('images/yellowbird-downflap.png');
+    birdImgUpFlap =loadImage('images/yellowbird-upflap.png');
+
 }
 
 function setup() {
@@ -48,7 +52,7 @@ function keyPressed(){
         bird.up();
     }
 }
-function mousePressed() {
-
-    bird.up();
-}
+// function mousePressed() {
+//
+//     bird.up();
+// }

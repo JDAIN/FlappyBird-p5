@@ -26,7 +26,7 @@ class Pipes {
 
     update() {
         //every 55 frames new pipe
-        if (frameCount % 55 == 0) {
+        if (frameCount % 60 == 0) {
             let randomStartGapY = Math.random() * (this.gapEnd - this.gapStart) + this.gapStart;
             this.pipes.push(
                 {
