@@ -13,23 +13,19 @@ function preload() {
     birdImgMidFlap = loadImage('images/yellowbird-midflap.png');
     birdImgDownFlap = loadImage('images/yellowbird-downflap.png');
     birdImgUpFlap = loadImage('images/yellowbird-upflap.png');
-
 }
 
 function setup() {
     // put setup code here
     angleMode(DEGREES);
-    createCanvas(450, 600);
+    createCanvas(450, 550);
     background(backgroundImg);
-
     drawBase();
     bird = new Bird();
     pipes = new Pipes();
-
 }
 
 function draw() {
-    console.log(floor(bird.aVelocity), bird.aAccel);
     background(backgroundImg);
     // put drawing code here
     bird.draw();
@@ -42,7 +38,6 @@ function draw() {
     fill(0);
     stroke(0);
     text("FPS: " + fps.toFixed(2), 10, height - 10);
-
 
 }
 
