@@ -1,25 +1,24 @@
-
 let bird;
 let pipes;
 let backgroundImg;
-
 let botPipeImg;
 let topPipImg;
 
-function preload(){
+
+function preload() {
     backgroundImg = loadImage('images/background-day.png');
     base = loadImage('images/base.png');
     botPipeImg = loadImage('images/pipe-green.png');
-    topPipImg =loadImage('images/pipe-green-top.png');
+    topPipImg = loadImage('images/pipe-green-top.png');
     birdImgMidFlap = loadImage('images/yellowbird-midflap.png');
-    birdImgDownFlap =loadImage('images/yellowbird-downflap.png');
-    birdImgUpFlap =loadImage('images/yellowbird-upflap.png');
+    birdImgDownFlap = loadImage('images/yellowbird-downflap.png');
+    birdImgUpFlap = loadImage('images/yellowbird-upflap.png');
 
 }
 
 function setup() {
-  // put setup code here
-    createCanvas(450,600);
+    // put setup code here
+    createCanvas(450, 600);
     background(backgroundImg);
     drawBase();
     bird = new Bird();
@@ -29,7 +28,7 @@ function setup() {
 
 function draw() {
     background(backgroundImg);
-  // put drawing code here
+    // put drawing code here
     bird.draw();
     bird.update();
     pipes.update();
@@ -44,15 +43,17 @@ function draw() {
 
 }
 
-function drawBase(){
-   return image(base,0,height-base.height+30, width, base.height);
+function drawBase() {
+    return image(base, 0, height - base.height + 30, width, base.height);
 }
-function keyPressed(){
-    if(keyCode = "UP_ARROW"){
+
+function keyPressed() {
+    if (keyCode === UP_ARROW || key === ' ') {
         bird.up();
     }
 }
-// function mousePressed() {
-//
-//     bird.up();
-// }
+
+function mousePressed() {
+
+    bird.up();
+}
