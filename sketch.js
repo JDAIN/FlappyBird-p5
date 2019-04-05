@@ -18,8 +18,10 @@ function preload() {
 
 function setup() {
     // put setup code here
+    angleMode(DEGREES);
     createCanvas(450, 600);
     background(backgroundImg);
+
     drawBase();
     bird = new Bird();
     pipes = new Pipes();
@@ -27,6 +29,7 @@ function setup() {
 }
 
 function draw() {
+    console.log(floor(bird.aVelocity), bird.aAccel);
     background(backgroundImg);
     // put drawing code here
     bird.draw();
