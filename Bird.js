@@ -36,6 +36,9 @@ class Bird {
     }
 
     update() {
+        //constrain top
+        this.y = constrain(this.y, 0, height);
+
         this.velocity += this.gravity;
         this.y += this.velocity;
         this.velocity = constrain(this.velocity, -99, this.maxVelocity);
@@ -52,24 +55,49 @@ class Bird {
         this.velocity = this.upLift;
     }
 
-    collide(col_pipes) {
-        //if()
+
+    collide() {
+        //birdImgDownFlap.width/2 is for the bird(start point is the center of the bird)
+        let frontBorderBird = this.x + birdImgMidFlap.width / 2;
+        let topBorderBird = this.y - birdImgUpFlap.height / 2;
+        let botBorderBird =this.y + birdImgUpFlap.height / 2;
+
+        //collision with base
+        if (this.y > height - base.height + 30 - birdImgDownFlap.width / 2) {
+            return true;
+        }
+        for (let i = 0; i < pipes.pipes.length; i++) {
+            if (pipes.pipes[i][0][1]) {
+                //top pipe collision, first check y than x collision
+                if (topBorderBird < pipes.pipes[i][0][1] && frontBorderBird > pipes.pipes[i][0][0]
+                    && frontBorderBird < pipes.pipes[i][0][0] + pipes.pipes[i][0][2]) {
+                    return true;
+                }
+                //bottom pipe collision, first check y than x collision
+                if (botBorderBird > pipes.pipes[i][1][1] && frontBorderBird > pipes.pipes[i][1][0]
+                    && frontBorderBird < pipes.pipes[i][1][0] + pipes.pipes[i][1][2]) {
+                    return true;
+                }
+            }
+
+
+        }
     }
 
     _imageSwitcher() {
         imageMode(CENTER);
         switch (this.imageVersion) {
             case 0:
-                image(birdImgMidFlap, 0, 0, 34, 24);
+                image(birdImgMidFlap, 0, 0, birdImgMidFlap.width, birdImgMidFlap.height);
                 break;
             case 1:
-                image(birdImgDownFlap, 0, 0, 34, 24);
+                image(birdImgDownFlap, 0, 0, birdImgDownFlap.width, birdImgDownFlap.height);
                 break;
             case 2:
-                image(birdImgMidFlap, 0, 0, 34, 24);
+                image(birdImgMidFlap, 0, 0, birdImgMidFlap.width, birdImgMidFlap.height);
                 break;
             case 3:
-                image(birdImgUpFlap, 0, 0, 34, 24);
+                image(birdImgUpFlap, 0, 0, birdImgUpFlap.width, birdImgUpFlap.height);
                 break;
         }
     }

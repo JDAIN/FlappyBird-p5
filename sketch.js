@@ -34,7 +34,10 @@ function draw() {
     pipes.update();
     pipes.draw();
     drawBase(); //draws base
-
+    if(bird.collide()){
+        console.log("lose");
+        noLoop();
+    }
     let fps = frameRate();
     fill(0);
     stroke(0);
@@ -53,6 +56,5 @@ function keyPressed() {
 }
 
 function mousePressed() {
-
     bird.up();
 }
