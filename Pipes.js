@@ -5,7 +5,7 @@ class Pipes {
         this.pointer = 0;
         this.xspeed = 2.5;
         this.x = width;
-        this.gap = 130;
+        this.gap = 120;
         //divide height by 4 and select first and last
         this.gapStart = height / 4;
         this.gapEnd = this.gapStart * 3 - this.gap;

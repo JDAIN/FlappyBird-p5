@@ -43,7 +43,6 @@ class Bird {
         this.y += this.velocity;
         this.velocity = constrain(this.velocity, -99, this.maxVelocity);
 
-
         this.angle += this.aVelocity;
         this.aVelocity += this.aAccel;
         this.angle = constrain(this.angle, 0, this.maxAngle);
