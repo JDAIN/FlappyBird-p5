@@ -28,8 +28,9 @@ function setup() {
 function draw() {
     background(backgroundImg);
     // put drawing code here
-    bird.draw();
     bird.update();
+    bird.draw();
+
     pipes.update();
     pipes.draw();
     drawBase(); //draws base
