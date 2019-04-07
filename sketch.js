@@ -3,7 +3,7 @@ let pipes;
 let backgroundImg;
 let botPipeImg;
 let topPipImg;
-
+let gameOverImg;
 
 function preload() {
     backgroundImg = loadImage('images/background-day.png');
@@ -13,6 +13,7 @@ function preload() {
     birdImgMidFlap = loadImage('images/yellowbird-midflap.png');
     birdImgDownFlap = loadImage('images/yellowbird-downflap.png');
     birdImgUpFlap = loadImage('images/yellowbird-upflap.png');
+    gameOverImg = loadImage('images/gameover.png')
 }
 
 function setup() {
@@ -26,6 +27,8 @@ function setup() {
 }
 
 function draw() {
+
+
     background(backgroundImg);
     // put drawing code here
     bird.update();
@@ -34,14 +37,16 @@ function draw() {
     pipes.update();
     pipes.draw();
     drawBase(); //draws base
-    if(bird.collide()){
-        console.log("lose");
-        noLoop();
-    }
+
     let fps = frameRate();
     fill(0);
     stroke(0);
     text("FPS: " + fps.toFixed(2), 10, height - 10);
+    if (bird.collide()) {
+        console.log("lose");
+        image(gameOverImg,width/2-(gameOverImg.width/2), height*0.25);
+        noLoop();
+    }
 
 }
 
