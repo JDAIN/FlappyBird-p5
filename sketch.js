@@ -4,6 +4,7 @@ let backgroundImg;
 let botPipeImg;
 let topPipImg;
 let gameOverImg;
+let base;
 
 function preload() {
     backgroundImg = loadImage('images/background-day.png');
@@ -17,7 +18,6 @@ function preload() {
 }
 
 function setup() {
-    // put setup code here
     angleMode(DEGREES);
     createCanvas(450, 550);
     background(backgroundImg);
@@ -27,16 +27,13 @@ function setup() {
 }
 
 function draw() {
-
-
     background(backgroundImg);
-    // put drawing code here
     bird.update();
     bird.draw();
 
     pipes.update();
     pipes.draw();
-    drawBase(); //draws base
+    drawBase();
 
     let fps = frameRate();
     fill(0);

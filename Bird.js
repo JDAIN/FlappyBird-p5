@@ -66,6 +66,7 @@ class Bird {
             return true;
         }
         for (let i = 0; i < pipes.pipes.length; i++) {
+            //check if pipe is filled, needed bc of circular array
             if (pipes.pipes[i][0][1]) {
                 //top pipe collision, first check y than x collision
                 if (topBorderBird < pipes.pipes[i][0][1] && frontBorderBird > pipes.pipes[i][0][0]
