@@ -24,6 +24,7 @@ function setup() {
     drawBase();
     bird = new Bird();
     pipes = new Pipes();
+    frameRate(60);
 }
 
 function draw() {

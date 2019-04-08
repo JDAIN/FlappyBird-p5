@@ -12,6 +12,8 @@ class Bird {
         this.aAccel = 0.9;
         this.maxAngle = 90;
         this.maxAvelocity = 9;
+        //amount of pixel which get ignored by hitbox
+        this.nice = 2;
     }
 
     draw() {
@@ -57,31 +59,30 @@ class Bird {
 
     collide() {
         //birdImgDownFlap.width/2 is for the bird(start point is the center of the bird)
-        let frontBorderBird = this.x + birdImgMidFlap.width / 2;
-        let topBorderBird = this.y - birdImgUpFlap.height / 2;
-        let botBorderBird =this.y + birdImgUpFlap.height / 2;
-
+        let frontBorderBird = (this.x + birdImgMidFlap.width / 2) - this.nice;
+        let topBorderBird = (this.y - birdImgUpFlap.height / 2) + this.nice;
+        let botBorderBird = (this.y + birdImgUpFlap.height / 2) - this.nice;
+        let backBorderBird = (this.x - birdImgMidFlap.width / 2) + this.nice;
         //collision with base
         if (this.y > height - base.height + 30 - birdImgDownFlap.width / 2) {
             return true;
         }
         for (let i = 0; i < pipes.pipes.length; i++) {
-            //check if pipe is filled, needed bc of circular array
             if (pipes.pipes[i][0][1]) {
-                //top pipe collision, first check y than x collision
-                if (topBorderBird < pipes.pipes[i][0][1] && frontBorderBird > pipes.pipes[i][0][0]
-                    && frontBorderBird < pipes.pipes[i][0][0] + pipes.pipes[i][0][2]) {
-                    return true;
+                //check front,  top, back
+                if (frontBorderBird > pipes.pipes[i][0][0] && topBorderBird < pipes.pipes[i][0][1] &&
+                    backBorderBird < pipes.pipes[i][0][0] + 52) {
+                    return true
                 }
-                //bottom pipe collision, first check y than x collision
-                if (botBorderBird > pipes.pipes[i][1][1] && frontBorderBird > pipes.pipes[i][1][0]
-                    && frontBorderBird < pipes.pipes[i][1][0] + pipes.pipes[i][1][2]) {
-                    return true;
+                //check front,bot,top,back
+                if (frontBorderBird > pipes.pipes[i][1][0] && botBorderBird > pipes.pipes[i][1][1] &&
+                    backBorderBird < pipes.pipes[i][1][0] + 52) {
+                    return true
                 }
             }
 
-
         }
+
     }
 
     _imageSwitcher() {
