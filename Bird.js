@@ -1,6 +1,6 @@
 class Bird {
     constructor() {
-        this.x = 90;
+        this.x = width /2 -50;
         this.y = height / 2;
         this.gravity = 0.8;
         this.velocity = 0;
@@ -9,7 +9,7 @@ class Bird {
         this.imageVersion = 0;
         this.angle = 0;
         this.aVelocity = 0;
-        this.aAccel = 0.9;
+        this.aAccel = 0.8;
         this.maxAngle = 90;
         this.maxAvelocity = 9;
         //amount of pixel which get ignored by hitbox
@@ -17,7 +17,7 @@ class Bird {
     }
 
     draw() {
-        if (frameCount % 17 == 0) {
+        if (frameCount % 12 == 0) {
             this.imageVersion++;
             if (this.imageVersion > 3) {
                 this.imageVersion = 0;

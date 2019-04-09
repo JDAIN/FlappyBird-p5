@@ -1,3 +1,5 @@
+let starterBird;
+let starterSwitcher;
 let bird;
 let pipes;
 let backgroundImg;
@@ -6,7 +8,7 @@ let topPipImg;
 let gameOverImg;
 let base;
 let gameOver;
-
+let input;
 
 function preload() {
     backgroundImg = loadImage('images/background-day.png');
@@ -27,28 +29,48 @@ function setup() {
     drawBase();
     bird = new Bird();
     pipes = new Pipes();
+    starterBird = new Bird();
     frameRate(60);
     gameOver = false;
+    input = false;
+    starterSwitcher = -1;
 }
 
 function draw() {
-    background(backgroundImg);
-    bird.update();
-    bird.draw();
+    if (input) {
+        background(backgroundImg);
+        bird.update();
+        bird.draw();
 
-    pipes.update();
-    pipes.draw();
-    drawBase();
+        pipes.update();
+        pipes.draw();
+        drawBase();
 
-    let fps = frameRate();
-    fill(0);
-    stroke(0);
-    text("FPS: " + fps.toFixed(2), 10, height - 10);
-    if (bird.collide()) {
-        console.log("lose");
-        image(gameOverImg, width / 2 - (gameOverImg.width / 2), height * 0.25);
-        noLoop();
-        gameOver = true
+        let fps = frameRate();
+        fill(0);
+        stroke(0);
+        text("FPS: " + fps.toFixed(2), 10, height - 10);
+        if (bird.collide()) {
+            console.log("lose");
+            image(gameOverImg, width / 2 - (gameOverImg.width / 2), height * 0.25);
+            setTimeout(noLoop(),5000);
+            noLoop();
+            gameOver = true;
+        }
+    } else {
+
+        background(backgroundImg);
+        starterBird.velocity = 7;
+        starterBird.y += starterSwitcher * 0.3;
+        starterBird.draw();
+        if (starterBird.y > height / 2 + 6) {
+            starterSwitcher = -1;
+        } else if (starterBird.y < height / 2 - 6) {
+            starterSwitcher = 1;
+        }
+        drawBase();
+
+
     }
 
 }
@@ -57,29 +79,33 @@ function drawBase() {
     return image(base, 0, height - base.height + 30, width, base.height);
 }
 
-function reset(){
+function reset() {
+    frameRate(60);
+    input = false;
     gameOver = false;
     bird = new Bird();
     pipes = new Pipes();
+    starterBird = new Bird();
+    starterSwitcher = -1;
     loop();
 }
 
 function keyPressed() {
     if (!gameOver) {
         if (keyCode === UP_ARROW || key === ' ') {
+            input = true;
             bird.up();
-        } else{
+        } else {
             reset();
-            gameOver = false;
         }
     }
 }
 
 function mousePressed() {
     if (!gameOver) {
+        input = true;
         bird.up();
-    } else{
+    } else {
         reset();
-        gameOver = false;
     }
 }
