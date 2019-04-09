@@ -5,6 +5,8 @@ let botPipeImg;
 let topPipImg;
 let gameOverImg;
 let base;
+let gameOver;
+
 
 function preload() {
     backgroundImg = loadImage('images/background-day.png');
@@ -15,6 +17,7 @@ function preload() {
     birdImgDownFlap = loadImage('images/yellowbird-downflap.png');
     birdImgUpFlap = loadImage('images/yellowbird-upflap.png');
     gameOverImg = loadImage('images/gameover.png')
+
 }
 
 function setup() {
@@ -25,6 +28,7 @@ function setup() {
     bird = new Bird();
     pipes = new Pipes();
     frameRate(60);
+    gameOver = false;
 }
 
 function draw() {
@@ -42,8 +46,9 @@ function draw() {
     text("FPS: " + fps.toFixed(2), 10, height - 10);
     if (bird.collide()) {
         console.log("lose");
-        image(gameOverImg,width/2-(gameOverImg.width/2), height*0.25);
+        image(gameOverImg, width / 2 - (gameOverImg.width / 2), height * 0.25);
         noLoop();
+        gameOver = true
     }
 
 }
@@ -52,12 +57,29 @@ function drawBase() {
     return image(base, 0, height - base.height + 30, width, base.height);
 }
 
+function reset(){
+    gameOver = false;
+    bird = new Bird();
+    pipes = new Pipes();
+    loop();
+}
+
 function keyPressed() {
-    if (keyCode === UP_ARROW || key === ' ') {
-        bird.up();
+    if (!gameOver) {
+        if (keyCode === UP_ARROW || key === ' ') {
+            bird.up();
+        } else{
+            reset();
+            gameOver = false;
+        }
     }
 }
 
 function mousePressed() {
-    bird.up();
+    if (!gameOver) {
+        bird.up();
+    } else{
+        reset();
+        gameOver = false;
+    }
 }
